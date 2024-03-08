@@ -1,7 +1,6 @@
 require 'tmpdir'
 
 class RailsAppsController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def create
     app_name = params[:app_name]
