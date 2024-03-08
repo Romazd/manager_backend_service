@@ -18,8 +18,8 @@ class RailsAppsController < ApplicationController
         Dir.chdir(app_name) do
           Rails.logger.info('Initializing Git repository and committing initial state')
           system('git init')
-          system('git config user.email "you@example.com"')
-          system('git config user.name "Your Name"')
+          system('git config user.email "segundo.marco@gmail.com"')
+          system('git config user.name "Marco Sandoval"')
           system('git add .')
           system('git commit -m "Initial commit"')
   
