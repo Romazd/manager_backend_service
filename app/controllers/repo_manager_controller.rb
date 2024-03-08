@@ -15,6 +15,7 @@ class RepoManagerController < ApplicationController
     end
     repos = JSON.parse(response.body) if response.is_a?(Net::HTTPSuccess)
     repos_list = repos.map { |repo| repo['name'] }
+    Rails.logger.info("User's repositories: #{repos_list.join(', ')}")
     repos_list = repos_list.join(', ')
   rescue => e
     puts "Error: #{e.message}"
