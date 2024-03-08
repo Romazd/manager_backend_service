@@ -13,14 +13,21 @@ class RepoManagerController < ApplicationController
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
       http.request(request)
     end
-    repos = JSON.parse(response.body) if response.is_a?(Net::HTTPSuccess)
-    repos_list = repos.map { |repo| repo['name'] }
-    Rails.logger.info("User's repositories: #{repos_list.join(', ')}")
-    repos_list = repos_list.join(', ')
+    
+    if response.is_a?(Net::HTTPSuccess)
+      repos = JSON.parse(response.body)
+      repos_list = repos.map { |repo| repo['name'] }
+      Rails.logger.info("User's repositories: #{repos_list.join(', ')}")
+      
+      render json: { repositories: repos_list }
+    else
+      render json: { error: 'Failed to fetch repositories' }, status: :bad_request
+    end
   rescue => e
-    puts "Error: #{e.message}"
-    []
+    Rails.logger.error "Error: #{e.message}"
+    render json: { error: e.message }, status: :internal_server_error
   end
+  
   
 
 end
