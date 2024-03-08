@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   post '/create_rails_app', to: 'rails_apps#create'
 
+  post "/list_user_repos", to: "repo_manager#list_user_repos"
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
