@@ -41,7 +41,7 @@ class RepoManagerController < ApplicationController
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
       http.request(request)
     end
-  
+    Rails.logger.info("Response: #{response}")
     if response.is_a?(Net::HTTPSuccess)
       add_response = JSON.parse(response.body)
       Rails.logger.info("Adding a collaborator was: #{add_response}")
