@@ -58,6 +58,7 @@ class RepoManagerController < ApplicationController
   def remove_repo_collaborator
     repo_name = params[:repo_name]
     username_to_remove = params[:username_to_remove]
+    Rails.logger.info("Removing #{username_to_remove} from #{repo_name}")
     access_token = ENV['ACCESS_PAT']
     uri = URI("https://api.github.com/repos/Romazd/#{repo_name}/collaborators/#{username_to_remove}")
     request = Net::HTTP::Delete.new(uri)
