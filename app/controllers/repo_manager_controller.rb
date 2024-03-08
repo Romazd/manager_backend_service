@@ -55,7 +55,7 @@ class RepoManagerController < ApplicationController
     false
   end
   
-  def remove_repo_collaborator(repo_name, username_to_remove, access_token)
+  def remove_repo_collaborator
     repo_name = params[:repo_name]
     username_to_remove = params[:username_to_remove]
     access_token = ENV['ACCESS_PAT']
