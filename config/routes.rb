@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post "/add_repo_collaborator", to: "repo_manager#add_repo_collaborator"
 
+  post "/remove_repo_collaborator", to: "repo_manager#remove_repo_collaborator"
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

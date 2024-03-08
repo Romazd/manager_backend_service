@@ -55,7 +55,31 @@ class RepoManagerController < ApplicationController
     false
   end
   
+  def remove_repo_collaborator(repo_name, username_to_remove, access_token)
+    repo_name = params[:repo_name]
+    username_to_remove = params[:username_to_remove]
+    access_token = ENV['ACCESS_PAT']
+    uri = URI("https://api.github.com/repos/Romazd/#{repo_name}/collaborators/#{username_to_remove}")
+    request = Net::HTTP::Delete.new(uri)
+    request["Authorization"] = "token #{access_token}"
   
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+      http.request(request)
+    end
+  
+    Rails.logger.info("Response: #{response}")
+    if response.is_a?(Net::HTTPSuccess)
+      remove_response = JSON.parse(response.body)
+      Rails.logger.info("Removing a collaborator was: #{remove_response}")
+      
+      render json: { remove_response: remove_response }
+    else
+      render json: { error: 'Failed to add a collaborator' }, status: :bad_request
+    end
+  rescue => e
+    puts "Error removing collaborator: #{e.message}"
+    false
+  end
   
 
 end
