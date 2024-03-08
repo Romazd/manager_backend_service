@@ -13,11 +13,9 @@ class RepoManagerController < ApplicationController
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
       http.request(request)
     end
-    Rails.logger.info("Response: #{response.body}")
     repos = JSON.parse(response.body) if response.is_a?(Net::HTTPSuccess)
-    repos.map { |repo| repo['name'] }
-    Rails.logger.info("Repos: #{repos}")
-    "hello"
+    repos_list = repos.map { |repo| repo['name'] }
+    repos_list = repos_list.join(', ')
   rescue => e
     puts "Error: #{e.message}"
     []
