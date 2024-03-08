@@ -27,7 +27,7 @@ class RailsAppsController < ApplicationController
           github_username = 'Romazd'
           repo_name = "#{app_name}"
           Rails.logger.info("Creating GitHub repository and pushing to it")
-          # system("curl -X POST -H 'Authorization: token #{github_token}' -H 'Content-Type: application/json' https://api.github.com/user/repos -d '{\"name\":\"#{app_name}\"}'")
+          system("curl -X POST -H 'Authorization: token #{github_token}' -H 'Content-Type: application/json' https://api.github.com/user/repos -d '{\"name\":\"#{app_name}\"}'")
           system("git remote add origin https://#{github_username}:#{github_token}@github.com/#{github_username}/#{repo_name}.git")
           system('git branch -M main') # Ensure the branch is named 'main'
           system('git push -u origin main') # Push using the correct branch name
