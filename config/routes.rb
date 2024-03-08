@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   post "/list_user_repos", to: "repo_manager#list_user_repos"
 
+  post "/add_repo_collaborator", to: "repo_manager#add_repo_collaborator"
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
