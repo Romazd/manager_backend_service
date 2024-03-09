@@ -14,6 +14,14 @@ Rails.application.routes.draw do
 
   post "/remove_repo_collaborator", to: "repo_manager#remove_repo_collaborator"
 
+  post "/create_webhook", to: "repo_manager#create_webhook"
+
+  post "/webhook_receiver", to: "repo_manager#webhook_receiver"
+
+  post "/protect_branch", to: "repo_manager#protect_branch"
+
+  post "/create_workflow_webhook", to: "repo_manager#create_workflow_webhook"
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
